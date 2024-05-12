@@ -3,7 +3,11 @@ import { PORT } from './config.js'
 import { sequelize } from './database/database.js'
 
 //import tabla de Db
-import './models/user.models.js'
+//import './models/user.model.js'
+//import './models/poll.models.js'
+//import './models/question.model.js'
+//import './models/item.model.js'
+//import './models/choose.model.js'
 
 
 async function main(){

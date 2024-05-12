@@ -121,7 +121,20 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
     res.cookie('token', "", {
-        expires: new Data(0)
+        expires: new Date(0)
     })
     return res.sendStatus(200)
+}
+
+export const profile = async(req, res) => {
+    const userFound = await Users.findByPk(req.user.id)
+    if(!userFound)  return res.status(404).json({message: "Usuario no valido"})
+
+    return res.json({
+        id: userFound.id,
+        email: userFound.email,
+        name: userFound.name,
+        phone: userFound.phone,
+    })
+    
 }
