@@ -1,4 +1,3 @@
-import { pool } from "../db.js";
 
 //poll Module
 export const pollRegister = (req,res) => {
@@ -7,7 +6,7 @@ export const pollRegister = (req,res) => {
     res.send('Registrando')
 };
 
-export const polls = (req,res) => {
+export const getPolls = (req,res) => {
     res.send('visualización encuestas')
 }
 
