@@ -1,4 +1,5 @@
 import { Polls } from '../models/poll.models.js'
+import { Question } from '../models/question.models.js';
 //poll Module
 export const pollRegister = async(req, res) => {
     const { pollName } = req.body
@@ -61,4 +62,15 @@ export const deletePoll = async(req,res) => {
     }catch(err){
         return res.status(500).json({message: "no se logra eliminar usuario"});
     }
+}
+
+export const getPollQuestions = async(req,res) => {
+    const {id} = req.params
+
+    const questions = await Question.findAll({
+        where: {
+            pollId: id
+        }
+    })
+    res.json(questions)
 }

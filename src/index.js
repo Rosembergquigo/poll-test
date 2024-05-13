@@ -8,11 +8,12 @@ import { sequelize } from './database/database.js'
 //import './models/question.model.js'
 //import './models/item.model.js'
 //import './models/choose.model.js'
+//import './models/pollAnswer.models.js'
 
 
 async function main(){
     try{
-        await sequelize.sync({alter: true})
+        await sequelize.sync()
         /*await sequelize.authenticate()
         console.log("Conexión a db éxitosa");*/
         app.listen(PORT)
