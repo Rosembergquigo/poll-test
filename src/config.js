@@ -8,3 +8,6 @@ export const SQLUSER = "postgres"
 
 //Valores JWT
 export const SECRET = "poll Compensar"
+
+//valores API
+export const URLAPI = "http://localhost:3000/api/"
