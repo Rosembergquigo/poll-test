@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useAuth } from "../context/authContext";
-
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function LoginPage() {
 
@@ -10,7 +11,12 @@ export default function LoginPage() {
     formState:{errors}
     } = useForm();
 
-   const {signin, errors: siginErrors} = useAuth();
+   const {signin, isAuthenticated, errors: siginErrors} = useAuth();
+   const navigate =  useNavigate();
+   console.log(siginErrors)
+   useEffect(()=>{
+       if(isAuthenticated) navigate('/poll')
+   },[isAuthenticated])
 
   const onSubmit= handleSubmit((data) => {
     signin(data);

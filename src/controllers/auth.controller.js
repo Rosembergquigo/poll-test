@@ -8,8 +8,8 @@ export const register = async (req, res) => {
     const {email, name, phone, password, profile} = req.body
     try{
 
-        const userFound = await Users.findOne({email})
-        if(userFound) return res.status(400).json(["Usuario ya se encuentra en la plataforma"]);
+        //const userFound = await Users.findOne({email})
+        //if(userFound) return res.status(400).json(["Usuario ya se encuentra en la plataforma"]);
 
         const passwordHash = await bcrypt.hash(password,10)
         const newUser = await Users.create({

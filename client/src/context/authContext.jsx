@@ -31,6 +31,8 @@ export const AuthProvider = ({children}) => {
         try{
             const res = await loginRequest(user)
             console.log(res)
+            setUser(res.data);
+            setIsAuthenticated(true)
         }catch(err){
             setErrors(err.response.data)
             console.error(err)

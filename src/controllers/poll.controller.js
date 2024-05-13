@@ -1,3 +1,4 @@
+import { Item } from '../models/item.models.js';
 import { Polls } from '../models/poll.models.js'
 import { Question } from '../models/question.models.js';
 //poll Module
@@ -72,5 +73,18 @@ export const getPollQuestions = async(req,res) => {
             pollId: id
         }
     })
+    
+     
+    /*
+    questions.map(async(question, i) => {
+        console.log(question.dataValues.id)
+        const items = await Item.findAll({
+            where:{
+                questionId: question.dataValues.id
+            }
+        })
+        console.log(items.dataValues)
+    })*/
+
     res.json(questions)
 }
