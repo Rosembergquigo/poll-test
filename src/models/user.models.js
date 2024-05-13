@@ -1,5 +1,6 @@
 import {DataTypes} from 'sequelize'
 import { sequelize } from '../database/database.js'
+import { PollsAnswer } from './pollAnswer.models.js'
 
 export const Users = sequelize.define('users',{
     id:{
@@ -26,4 +27,14 @@ export const Users = sequelize.define('users',{
         type: DataTypes.INTEGER
     }
 
+})
+
+Users.hasMany(PollsAnswer, {
+    foreignKey: 'userId',
+    sourceKey: 'id'
+})
+
+PollsAnswer.belongsTo(Users, {
+    foreignKey: 'userId',
+    targetKey: 'id'
 })

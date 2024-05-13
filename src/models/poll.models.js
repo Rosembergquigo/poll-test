@@ -1,6 +1,7 @@
 import {DataTypes} from 'sequelize'
 import { sequelize } from '../database/database.js'
 import { Question } from './question.models.js';
+import { PollsAnswer } from './pollAnswer.models.js';
 
 export const Polls = sequelize.define('poll',{
     id:{
@@ -10,10 +11,6 @@ export const Polls = sequelize.define('poll',{
     },
     poll_name:{
         type: DataTypes.STRING
-    },
-    date:{
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
     }
 });
 
@@ -23,6 +20,16 @@ Polls.hasMany(Question, {
 })
 
 Question.belongsTo(Polls, {
+    foreignKey: 'pollId',
+    targetKey: 'id'
+})
+
+Polls.hasMany(PollsAnswer, {
+    foreignKey: 'pollId',
+    sourceKey: 'id'
+})
+
+PollsAnswer.belongsTo(Polls, {
     foreignKey: 'pollId',
     targetKey: 'id'
 })
