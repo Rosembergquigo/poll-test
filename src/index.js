@@ -12,7 +12,7 @@ import { sequelize } from './database/database.js'
 
 async function main(){
     try{
-        await sequelize.sync()
+        await sequelize.sync({alter: true})
         /*await sequelize.authenticate()
         console.log("Conexión a db éxitosa");*/
         app.listen(PORT)

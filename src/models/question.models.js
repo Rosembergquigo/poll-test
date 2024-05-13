@@ -1,5 +1,6 @@
 import {DataTypes} from 'sequelize'
 import { sequelize } from '../database/database.js'
+import { Item } from './item.models.js'
 
 export const Question = sequelize.define('questions',{
     id:{
@@ -9,8 +10,15 @@ export const Question = sequelize.define('questions',{
     },
     question_text: {
         type: DataTypes.STRING
-    },
-    id_poll:{
-        type: DataTypes.INTEGER
     }
+})
+
+Question.hasMany(Item, {
+    foreignKey: 'itemId',
+    sourceKey: 'id'
+})
+
+Item.belongsTo(Question, {
+    foreignKey: 'itemId',
+    targetKey: 'id'
 })

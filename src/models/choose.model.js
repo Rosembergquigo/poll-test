@@ -7,15 +7,6 @@ export const Chooses = sequelize.define('chooses',{
         primaryKey: true,
         autoIncrement: true
     },
-    id_user:{
-        type: DataTypes.INTEGER
-    },
-    id_poll:{
-        type: DataTypes.INTEGER
-    },
-    id_question:{
-        type: DataTypes.INTEGER
-    },
     item_choose:{
         type: DataTypes.STRING(1)
     }

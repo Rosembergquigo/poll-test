@@ -12,8 +12,5 @@ export const Item = sequelize.define('items',{
     },
     item_value:{
         type: DataTypes.STRING(1)
-    },
-    id_question:{
-        type: DataTypes.INTEGER
     }
 })
