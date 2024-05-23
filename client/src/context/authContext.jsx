@@ -1,5 +1,7 @@
-import { createContext, useContext, useState } from "react";
-import { registerRequest, loginRequest } from '../api/auth';
+import { createContext, useContext, useEffect, useState } from "react";
+import Cookies from 'js-cookie'
+import { registerRequest, loginRequest, verifyTokenRequest } from '../api/auth';
+import { getPollQuestions } from "../api/poll";
 
 export const AuthContext = createContext()
 export const useAuth = () => {
@@ -34,16 +36,52 @@ export const AuthProvider = ({children}) => {
             setUser(res.data);
             setIsAuthenticated(true)
         }catch(err){
-            setErrors(err.response.data)
             console.error(err)
-            //setErrors(err.response.data);
+            /*if (Array.isArray(err.response.data)) {
+                return setErrors(err.response.data)
+            }
+            console.error(err)
+            setErrors([err.response.data.message]);*/
         }
     }
+
+    const getPollQuetions = async() => {
+        try{
+            const res = await getPollQuestions(1)
+            console.log(res)
+        }catch(err){
+            setErrors(err.response.data)
+        }
+    }
+
+    useEffect(()=>{
+        async function checkLogin() {
+            const cooikes = Cookies.get()
+
+            if(cooikes.token)
+            {
+                try{
+                    const res = await verifyTokenRequest(cooikes.token)
+                    if(!res.data) return setIsAuthenticated(false)
+
+                        setIsAuthenticated(true)
+                        setUser(res.data)
+                }
+                catch(err){
+                    setIsAuthenticated(false)
+                    setUser(null)
+                }
+                
+            }
+        }
+        checkLogin();
+    }, [])
 
     return(
         <AuthContext.Provider value={{
             signup,
             signin,
+            getPollQuetions,
             user,
             isAuthenticated,
             errors

@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs';
 import { createAccessToken } from "../utils/jwt.js";
 import { Users } from "../models/user.models.js";
+import  jwt  from 'jsonwebtoken';
+import { SECRET } from '../config.js';
 
 //User Module
 export const register = async (req, res) => {
@@ -110,7 +112,7 @@ export const login = async (req, res) => {
         
         const token = await createAccessToken({id: userFond.id});
         
-        res.cookie("token", token)
+        res.cookie("token", token);
         res.json({
             id: userFond.id,
             email: userFond.email,
@@ -141,4 +143,23 @@ export const profile = async(req, res) => {
         phone: userFound.phone,
     })
     
+}
+
+export const verifyToken = async (req,res )=> {
+    const {token} = req.cookies
+
+    if(!token) return res.status(401).json({message: "Usuario no se pudo validar"})
+
+    jwt.verify(token, SECRET, async (err, user) => {
+        if(err) return res.status(401).json({message: "usuario no autorizado"}) 
+
+        const userFound = await Users.findByPk(user.id);
+        if(!userFound) return res.status(401).json({message: "usuario no autorizado"}) 
+
+        return res.json({
+            id: userFound.id,
+            nombre: userFound.name,
+            email: userFound.email
+        })
+    })
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
-import { API_URL } from "../config";
+import { URLAPI } from "../../../src/config.js";
 
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: URLAPI,
   withCredentials: true,
 });
 

@@ -12,8 +12,11 @@ export default function LoginPage() {
     } = useForm();
 
    const {signin, isAuthenticated, errors: siginErrors} = useAuth();
+
    const navigate =  useNavigate();
+
    console.log(siginErrors)
+   
    useEffect(()=>{
        if(isAuthenticated) navigate('/poll')
    },[isAuthenticated])
@@ -23,7 +26,7 @@ export default function LoginPage() {
   })
 
   return (
-    <div className="mx-auto mt-10 max-w-md rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 md:flex md:max-w-none">
+    <div className="mx-auto mt-10 w-md rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 md:flex md:max-w-none">
         
         <div className="p-8 sm:p-10 md:flex-auto">
         <h1 className="text-2xl font-bold tracking-tight text-gray-900">Bienvenido</h1>

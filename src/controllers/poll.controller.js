@@ -58,6 +58,7 @@ export const deletePoll = async(req,res) => {
             where:{
                 id
             }
+            
         });
         res.status(204).json({message: "Usuario eliminado"})
     }catch(err){
@@ -71,20 +72,10 @@ export const getPollQuestions = async(req,res) => {
     const questions = await Question.findAll({
         where: {
             pollId: id
-        }
+        },
+        include: Item
     })
     
-     
-    /*
-    questions.map(async(question, i) => {
-        console.log(question.dataValues.id)
-        const items = await Item.findAll({
-            where:{
-                questionId: question.dataValues.id
-            }
-        })
-        console.log(items.dataValues)
-    })*/
-
+    
     res.json(questions)
 }
